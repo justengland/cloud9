@@ -88,6 +88,9 @@ module.exports = ext.register("ext/html/html", {
         this.nodes.each(function(item){
             item.show();
         });
+        
+        btnHtmlOpen.setAttribute("class", "preview");
+        btnHtmlOpen.disabled = false; 
     },
 
     disable : function(){
@@ -96,8 +99,11 @@ module.exports = ext.register("ext/html/html", {
         this.enabled = false;
 
         this.nodes.each(function(item){
-            item.hide && item.hide();
+            //item.hide && item.hide();
         });
+        
+        btnHtmlOpen.setAttribute("class", "preview c9-toolbarbuttonDisabled");
+        btnHtmlOpen.disabled = true; 
     },
 
     destroy : function(){
