@@ -19,23 +19,6 @@
                   skin     = "c9-toolbarbutton"
                   onclick  = "lstRunCfg.remove()"
                   disabled = "{!lstRunCfg.selected || !![{lstRunCfg.selected}::@curfile]}"/>
-                  
-                <!--a:divider skin="c9-divider-double" /-->
-                
-                <!--a:button
-                  id       = "btnRun"
-                  icon     = "{itmDebug.checked ? 'bug.png' : 'run.png'}"
-                  caption  = "{itmDebug.checked ? 'debug' : 'run'}"
-                  onclick  = "require('ext/runpanel/runpanel').run(itmDebug.checked)"
-                  visible  = "{!stProcessRunning.active and 1}"
-                  skin     = "c9-toolbarbutton"
-                  submenu  = "mnuRunCfg" />
-                <a:button
-                  icon     = "stop.png"
-                  caption  = "stop"
-                  skin     = "c9-toolbarbutton"
-                  onclick  = "require('ext/runpanel/runpanel').stop()"
-                  visible  = "{stProcessRunning.active and 1}" /-->
             </a:hbox>
         </a:bar>
         

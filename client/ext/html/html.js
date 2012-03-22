@@ -43,9 +43,17 @@ module.exports = ext.register("ext/html/html", {
                 return;
             _self.afterSwitchOrOpen(page);
         });
+        ide.addEventListener("init.ext/runpanel/runpanel", function() {
+             ext.initExtension(_self);
+        });
     },
 
     afterSwitchOrOpen : function(node) {
+        if (node.$model === undefined) {
+            this.disable();
+            return;
+        }
+        
         var name = node.$model.data.getAttribute("name");
         var fileExtension = name.split(".").pop();
 
@@ -74,6 +82,14 @@ module.exports = ext.register("ext/html/html", {
 
         btnHtmlOpen.onclick = this.onOpenPage.bind(this);
         this.enabled = true;
+        
+        var page = tabEditors.getPage();
+        if (page) {
+            this.afterSwitchOrOpen(page.$doc.getNode());
+        }
+        else {
+            this.afterSwitchOrOpen(undefined);
+        }
     },
 
     onOpenPage : function() {
