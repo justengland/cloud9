@@ -49,8 +49,9 @@ module.exports = ext.register("ext/html/html", {
         var name = node.$model.data.getAttribute("name");
         var fileExtension = name.split(".").pop();
 
+        ext.initExtension(this);
+            
         if (previewExtensions.indexOf(fileExtension) > -1) {
-            ext.initExtension(this);
             this.page = node;
             this.enable();
         }
@@ -84,26 +85,16 @@ module.exports = ext.register("ext/html/html", {
         if (this.enabled)
             return;
         this.enabled = true;
-
-        this.nodes.each(function(item){
-            item.show();
-        });
         
-        btnHtmlOpen.setAttribute("class", "preview");
-        btnHtmlOpen.disabled = false; 
+        btnHtmlOpen.enable();
     },
 
     disable : function(){
         if (!this.enabled)
             return;
         this.enabled = false;
-
-        this.nodes.each(function(item){
-            //item.hide && item.hide();
-        });
         
-        btnHtmlOpen.setAttribute("class", "preview c9-toolbarbuttonDisabled");
-        btnHtmlOpen.disabled = true; 
+        btnHtmlOpen.disable();
     },
 
     destroy : function(){
