@@ -43,17 +43,18 @@ module.exports = ext.register("ext/html/html", {
                 return;
             _self.afterSwitchOrOpen(page);
         });
-        ide.addEventListener("init.ext/runpanel/runpanel", function() {
+
+        // for initial load--enable if there's a supported file, disable otherwise
+        ide.addEventListener("loadrunpanel", function(e){
              ext.initExtension(_self);
+        });
+        // after last page closes, disable
+        ide.addEventListener("afterlastclosefile", function(e) {
+            _self.disable();
         });
     },
 
     afterSwitchOrOpen : function(node) {
-        if (node.$model === undefined) {
-            this.disable();
-            return;
-        }
-        
         var name = node.$model.data.getAttribute("name");
         var fileExtension = name.split(".").pop();
 
@@ -88,7 +89,7 @@ module.exports = ext.register("ext/html/html", {
             this.afterSwitchOrOpen(page.$doc.getNode());
         }
         else {
-            this.afterSwitchOrOpen(undefined);
+            this.disable();
         }
     },
 

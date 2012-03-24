@@ -207,6 +207,9 @@ module.exports = ext.register("ext/runpanel/runpanel", {
 
         this.hotitems["run"]  = [btnRun];
         this.hotitems["stop"] = [btnStop];
+
+        ide.dispatchEvent("loadrunpanel", {
+        });
     },
 
     checkAutoHide : function(){

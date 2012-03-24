@@ -232,8 +232,12 @@ module.exports = ext.register("ext/tabbehaviors/tabbehaviors", {
         });
 
         tabEditors.addEventListener("close", function(e) {
-            if (tabEditors.getPage() == e.page)
+            if (tabEditors.getPage() == e.page) {
                 this.nextTabInLine = _self.accessed[_self.accessed.length - _self.$tabAccessCycle];
+                if (this.nextTabInLine === undefined) {
+                    ide.dispatchEvent("afterlastclosefile");
+                }
+            }
         });
 
         apf.addEventListener("keydown", function(eInfo) {
