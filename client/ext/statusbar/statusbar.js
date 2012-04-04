@@ -146,6 +146,16 @@ module.exports = ext.register("ext/statusbar/statusbar", {
             else
                 mnuStatusBarPrefs.appendChild(pItem.item);
         }
+       
+       !wrapMode.checked ? wrapModeViewport.disable() : wrapModeViewport.enable();
+        wrapMode.addEventListener("click", function(e) {
+           if (e.currentTarget.checked) {  	
+              wrapModeViewport.enable();   	
+          }
+            else {
+              wrapModeViewport.disable();
+           }	  	
+        });
 
         var editor = ceEditor.$editor;
         var theme = editor && editor.getTheme() || "ace/theme/textmate";
@@ -241,7 +251,7 @@ module.exports = ext.register("ext/statusbar/statusbar", {
             });
         }
     },
-
+    
     checkTheme: function(theme){
         require(["require", theme], function (require) {
             var reqTheme = require(theme);
